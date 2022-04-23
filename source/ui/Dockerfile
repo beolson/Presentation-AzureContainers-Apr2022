@@ -1,14 +1,16 @@
-FROM node:16-slim
+# https://hub.docker.com/_/microsoft-dotnet
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS bff-build
+WORKDIR /source
 
-RUN apt-get update && \
-    apt-get upgrade -y && \
-    apt-get install ca-certificates -y 
+# copy csproj and restore as distinct layers
+COPY ./bff-service/bff-service.csproj .
+RUN dotnet restore
 
-WORKDIR /usr/local/share/ca-certificates
-COPY zscaler.pem zscaler.crt
-RUN update-ca-certificates
+# copy everything else and build app
+COPY ./bff-service .
+RUN dotnet publish -c release -o /app --no-restore
 
-RUN npm config set cafile /etc/ssl/certs/ca-certificates.crt
+FROM node:16-slim as ui-build
 
 WORKDIR /home/appuser
 
@@ -17,17 +19,16 @@ RUN npm install -g npm@latest && \
     npm install -g serve
 
 # Install Javascript dependencies and build.
-COPY ./ /home/appuser/
+COPY ./ui-app/package.json /home/appuser/
 RUN npm install --production
 
-COPY . /home/appuser/
+COPY ./ui-app/ /home/appuser/
 RUN npm run build
 
-RUN useradd --create-home appuser && \
-    chown -R appuser:appuser /home/appuser
 
-USER appuser
-
-EXPOSE 8000
-
-CMD serve -l 8000 -s build
+# final stage/image
+FROM mcr.microsoft.com/dotnet/aspnet:6.0
+WORKDIR /app
+COPY --from=bff-build /app ./
+COPY --from=ui-build /home/appuser/build ./wwwroot
+ENTRYPOINT ["dotnet", "bff-service.dll"]

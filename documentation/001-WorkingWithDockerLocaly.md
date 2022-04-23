@@ -32,7 +32,8 @@ All build commands issued from the root of the repository
 
 
 `
-docker system prune
+docker system prune -a
+docker builder prune 
 docker compose -f ./infrastructure/DockerCompose-localdev.yml build --no-cache
 docker compose -f ./infrastructure/DockerCompose-localdev.yml up --remove-orphans
 `

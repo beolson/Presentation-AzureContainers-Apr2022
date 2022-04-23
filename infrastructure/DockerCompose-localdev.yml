@@ -4,39 +4,39 @@ version: "3"
 
 services:
     ui-service: 
-        image: "demo-ui:latest"
+        image: "ui-service:latest"
         build:
-          context: ../source/ui
+          context: ../source/ui-service
           dockerfile: Dockerfile
         ports: 
           - "8080:8000"
     bff-service:
-        image: "demo-bff-service:latest"
+        image: "bff-service:latest"
         build: 
           context: ../source/bff-service
-          dockerfile: DockerFile
+          dockerfile: Dockerfile
         ports:
           - "5000:80"
     count-service:
-        image: "demo-count-service:latest"
+        image: "count-service:latest"
         build: 
           context: ../source/count-service
-          dockerfile: DockerFile
+          dockerfile: Dockerfile
         ports:
           - "5001:8080"
     thing-noauth-service:
-        image: "demo-thing-service:latest"
+        image: "thing-service:latest"
         build: 
           context: ../source/thing-service
-          dockerfile: DockerFile
+          dockerfile: Dockerfile
         ports:
           - "5002:5000"
         depends_on:
             - db
     db:
-        image: "demo-sql-service:latest"
+        image: "sql-service:latest"
         build: 
-          dockerfile: DockerFile.sql-service
+          dockerfile: Dockerfile.sql-service
         ports:
           - "1433:1433"
 
