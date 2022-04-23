@@ -13,7 +13,7 @@
         "path": "source/count-service"
       },
       {
-        "path": "source/thing-noauth-service"
+        "path": "source/thing-service"
       },
       {
         "path": "source/ui"

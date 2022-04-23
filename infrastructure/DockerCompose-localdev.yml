@@ -3,17 +3,10 @@ version: "3"
 # docker-compose.exe -f .\DockerCompose-localdev.yml up
 
 services:
-    ui-service: 
-        image: "ui-service:latest"
-        build:
-          context: ../source/ui-service
-          dockerfile: Dockerfile
-        ports: 
-          - "8080:8000"
     bff-service:
         image: "bff-service:latest"
         build: 
-          context: ../source/bff-service
+          context: ../source/ui
           dockerfile: Dockerfile
         ports:
           - "5000:80"
@@ -24,7 +17,7 @@ services:
           dockerfile: Dockerfile
         ports:
           - "5001:8080"
-    thing-noauth-service:
+    thing-service:
         image: "thing-service:latest"
         build: 
           context: ../source/thing-service
