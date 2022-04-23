@@ -1,0 +1,22 @@
+{
+    "folders": [
+      {
+        "path": "infrastructure"
+      },
+      {
+        "path": "documentation"
+      },
+      {
+        "path": "source/bff-service"
+      },
+      {
+        "path": "source/count-service"
+      },
+      {
+        "path": "source/thing-noauth-service"
+      },
+      {
+        "path": "source/ui"
+      }
+    ]
+  }
