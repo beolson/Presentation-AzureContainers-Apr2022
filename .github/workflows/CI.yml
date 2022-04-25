@@ -37,7 +37,7 @@ jobs:
       with:
         push: true
         context:  source/ui
-        tags: ${{ secrets.ACR_ENDPOINT }}/ui:${{ github.sha }}
+        tags: ui:${{ github.sha }}
         labels: ${{ steps.meta.outputs.labels }}
 
     - name: Build & Push count service
