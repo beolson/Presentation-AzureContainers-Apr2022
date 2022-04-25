@@ -7,4 +7,7 @@
     <RootNamespace>bff_service</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Yarp.ReverseProxy" Version="1.0.1" />
+  </ItemGroup>
 </Project>

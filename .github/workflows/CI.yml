@@ -6,10 +6,9 @@ on:
 
 jobs:
 
-  build-ui:
+  build-containers:
 
     runs-on: ubuntu-latest
-
 
     steps:    
     - uses: actions/checkout@v2
