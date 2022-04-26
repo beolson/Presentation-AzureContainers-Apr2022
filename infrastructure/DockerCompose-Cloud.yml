@@ -1,0 +1,33 @@
+version: "3"
+
+# docker-compose.exe -f .\DockerCompose-localdev.yml up
+
+services:
+    bff:
+        image: "appdevsandboxacr.azurecr.io/bff-service:latest"
+        ports:
+          - "80:80"
+        depends_on:
+          - thing-service
+          - count-service
+        environment:
+          - THING_HOST=thing
+          - THING_PORT=5000
+          - COUNT_HOST=count
+          - COUNT_PORT=8080
+    count:
+        image: "appdevsandboxacr.azurecr.io/count-service:latest"
+
+    thing:
+        image: "appdevsandboxacr.azurecr.io/thing-service:latest"
+        environment:
+          - DB_SERVER=appdevsandbox.database.windows.net:1433
+          - DB_DATABASE=thingdb
+          - DB_PASSWORD=w@terb0y
+          - DB_USER=justme
+
+
+
+
+
+

@@ -4,7 +4,7 @@ version: "3"
 
 services:
     bff:
-        image: "bff-service:latest"
+        image: "appdevsandboxacr.azurecr.io/bff-service:latest"
         build: 
           context: ../source/ui
           dockerfile: Dockerfile
@@ -19,14 +19,14 @@ services:
           - COUNT_HOST=count
           - COUNT_PORT=8080
     count:
-        image: "count-service:latest"
+        image: "appdevsandboxacr.azurecr.io/count-service:latest"
         build: 
           context: ../source/count-service
           dockerfile: Dockerfile
         ports:
           - "5001:8080"
     thing:
-        image: "thing-service:latest"
+        image: "appdevsandboxacr.azurecr.io/thing-service:latest"
         build: 
           context: ../source/thing-service
           dockerfile: Dockerfile
@@ -35,7 +35,7 @@ services:
         depends_on:
             - db
     db:
-        image: "sql-service:latest"
+        image: "appdevsandboxacr.azurecr.io/sql-service:latest"
         build: 
           dockerfile: Dockerfile.sql-service
         ports:
