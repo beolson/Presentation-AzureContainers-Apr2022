@@ -8,7 +8,7 @@ RUN dotnet restore
 
 # copy everything else and build app
 COPY ./bff-service .
-RUN dotnet publish -c release -o /app --no-restore
+RUN dotnet publish -c release -o /app 
 
 FROM node:16-slim as ui-build
 

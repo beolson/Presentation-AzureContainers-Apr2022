@@ -3,21 +3,29 @@ version: "3"
 # docker-compose.exe -f .\DockerCompose-localdev.yml up
 
 services:
-    bff-service:
+    bff:
         image: "bff-service:latest"
         build: 
           context: ../source/ui
           dockerfile: Dockerfile
         ports:
           - "5000:80"
-    count-service:
+        depends_on:
+          - thing-service
+          - count-service
+        environment:
+          - THING_HOST=thing
+          - THING_PORT=5000
+          - COUNT_HOST=count
+          - COUNT_PORT=8080
+    count:
         image: "count-service:latest"
         build: 
           context: ../source/count-service
           dockerfile: Dockerfile
         ports:
           - "5001:8080"
-    thing-service:
+    thing:
         image: "thing-service:latest"
         build: 
           context: ../source/thing-service
