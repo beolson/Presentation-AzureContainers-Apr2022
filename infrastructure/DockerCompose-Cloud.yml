@@ -21,10 +21,10 @@ services:
     thing:
         image: "appdevsandboxacr.azurecr.io/thing-service:latest"
         environment:
-          - DB_SERVER=appdevsandbox.database.windows.net:1433
-          - DB_DATABASE=thingdb
-          - DB_PASSWORD=w@terb0y
-          - DB_USER=justme
+          - DB_SERVER=
+          - DB_DATABASE=
+          - DB_PASSWORD=
+          - DB_USER=
 
 
 
